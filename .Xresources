@@ -1,0 +1,42 @@
+!after editing .Xdefaults it may be reloaded with:
+!xrdb -load ~/.Xdefaults
+
+xterm*utf8:		2
+xterm*faceName: 	Dejavu Sans Mono
+xterm*faceSize:		13
+xterm*background: 	black
+xterm*foreground: 	white
+xterm*loginShell: 	true
+xterm*scrollBar: false
+xterm*rightScrollBar: true
+xterm*saveLines: 50000
+xterm*jumpScroll: true
+xterm*scrollTtyOutput: false
+xterm*scrollKey: true
+xterm*alwaysUseMods: true
+xterm*metaSendsEscape: true
+xterm*utf8Title: true
+
+Xft.dpi:         96
+Xft.antialias: 1
+Xft.hinting:    1
+Xft.hintstyle:  hintslight
+Xft.rgba:        rgb
+
+!urxvt*utf8:		2
+urxvt*font:             xft:Dejavu Sans Mono:size=12
+urxvt*background: 	black
+urxvt*foreground: 	white
+urxvt*loginShell: 	true
+urxvt*scrollBar: false
+urxvt*rightScrollBar: true
+urxvt*saveLines: 50000
+urxvt*jumpScroll: true
+urxvt*scrollTtyOutput: false
+urxvt*scrollKey: true
+urxvt*alwaysUseMods: true
+urxvt*metaSendsEscape: true
+!urxvt*utf8Title: true
+
+URxvt.transparent:   true
+URxvt.shading:       20
