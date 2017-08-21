@@ -1,42 +1,138 @@
-!after editing .Xdefaults it may be reloaded with:
-!xrdb -load ~/.Xdefaults
+! Lunarize color scheme for the X Window System
+! https://github.com/jrcharney/lunarize
+! NOTE: Do not use apostrophies in this file.
 
-xterm*utf8:		2
-xterm*faceName: 	Dejavu Sans Mono
-xterm*faceSize:		13
-xterm*background: 	black
-xterm*foreground: 	white
-xterm*loginShell: 	true
-xterm*scrollBar: false
-xterm*rightScrollBar: true
-xterm*saveLines: 50000
-xterm*jumpScroll: true
-xterm*scrollTtyOutput: false
-xterm*scrollKey: true
-xterm*alwaysUseMods: true
-xterm*metaSendsEscape: true
-xterm*utf8Title: true
+! Chose a terminal.
+! Initially we wanted to use screen-256color, but colors would not render.
+! URxvt*termName: screen-256color
+! URxvt*termName: rxvt-256color
+URxvt*termName: rxvt-unicode-256color
 
-Xft.dpi:         96
-Xft.antialias: 1
-Xft.hinting:    1
-Xft.hintstyle:  hintslight
-Xft.rgba:        rgb
 
-!urxvt*utf8:		2
-urxvt*font:             xft:Dejavu Sans Mono:size=12
-urxvt*background: 	black
-urxvt*foreground: 	white
-urxvt*loginShell: 	true
-urxvt*scrollBar: false
-urxvt*rightScrollBar: true
-urxvt*saveLines: 50000
-urxvt*jumpScroll: true
-urxvt*scrollTtyOutput: false
-urxvt*scrollKey: true
-urxvt*alwaysUseMods: true
-urxvt*metaSendsEscape: true
-!urxvt*utf8Title: true
+! Before we fix our colors, let us fix this issue with the Home and End keys in URXVT and RXVT
+URxvt*keysym.Home: \033[1~
+URxvt*keysym.End:  \033[4~
 
-URxvt.transparent:   true
-URxvt.shading:       20
+! Do not blink when we hit something
+URxvt*visualBell: false
+
+! Default Terminal Colors (basically your standard terminal colors)
+! These are the colors you should use if you are using IRSSI or Weechat
+
+! #define term_background		#222222
+
+! Do not define the background like this. It screws up the appearance when
+! black needs to appear on white.
+! #define term_background		[30]#000000
+
+#define term_background		#000000
+#define term_foreground		#dfdfdf
+
+#define term_dark_black		#000000
+#define term_dark_red		#cd0000
+#define term_dark_green		#00cd00
+#define term_dark_yellow	#cdcd00
+#define term_dark_blue		#0000cd
+#define term_dark_magenta	#cd00cd
+#define term_dark_cyan		#00cdcd
+#define term_dark_white		#e5e5e5
+#define term_light_black	#4d4d4d
+#define term_light_red		#ff0000
+#define term_light_green	#00ff00
+#define term_light_yellow	#ffff00
+#define term_light_blue		#0000ff
+#define term_light_magenta	#ff00ff
+#define term_light_cyan		#00ffff
+#define term_light_white	#ffffff
+
+! Turn scrollbars off
+URxvt.scrollBar: false
+
+! Set the geometry of the window.  If we do not do this, 80x25 will be used.
+URxvt*geometry: 96x30
+
+! Start as a login shell by prepending a hyphen to argv[0].
+! This is helpful for tmux and causes bash login files like ~/.bash_profile to be loaded.
+URxvt*loginShell: true
+
+
+! Fake transparency.
+! Use this if you do not have a compositor.
+! Fake transparency will show the wallpaper at the desktop level
+! but not any of the windows underneath. You will need real transparency for that.
+! Do not use shading, use fading for transparency.
+! You also cannot use shading if a tintcolor is set.
+urxvt*transparent: true
+urxvt*shading: 30
+
+! Real transparency.
+! Use this if you have a compositor or compositing (window) manager.
+! Real transparency will not work if a compositor like Kwin or Compiz is used.
+! If you want real transparency to work give Xfce or Fluxbox a try.
+! urxvt*depth: 32
+! urxvt*background: rgba:0000/0000/0000/c800
+! urxvt*background: [90]#000000
+
+! Fading is for unfocused windows.
+! You should set it to a low setting or else windows are too dark to see.
+URxvt*fading: 20
+
+! Set borderless to true if you do not want the gui container.
+! You will likely want to preset the location of the window if you do
+! and what application to run (i.e. conkey)
+URxvt*borderLess: false
+
+! Set inheritpixmap to true to use the parent background window pixmap
+! Basically use the background image of the parent process.
+! That being the desktop wallpaper.
+! A transparency method should be enabled if you want to use this effectively.
+URxvt*inheritPixmap: true
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            term_background
+ 
+! background and foreground colors
+URxvt*background:              term_background
+URxvt*foreground:              term_foreground
+! URxvt*highlightTextColor:      term_dark_black
+! URxvt*highlightColor:          term_light_white
+
+! Sixteen colors for terminals.
+!*color0:                  term_dark_black
+!*color1:                  term_dark_red
+!*color2:                  term_dark_green
+!*color3:                  term_dark_yellow
+!*color4:                  term_dark_blue
+!*color5:                  term_dark_magenta
+!*color6:                  term_dark_cyan
+!*color7:                  term_dark_white
+!*color8:                  term_light_black
+!*color9:                  term_light_red
+!*color10:                 term_light_green
+!*color11:                 term_light_yellow
+!*color12:                 term_light_blue
+!*color13:                 term_light_magenta
+!*color14:                 term_light_cyan
+!*color15:                 term_light_white
+
+! Changing the font
+! Using Liberation Mono for Powerline.
+! I have noticed things are a little more wider than usual.
+! To see what fonts are available, run fc-list
+urxvt*font:             xft:Dejavu Sans Mono:size=13
+!URxvt*font:            xft:Liberation Mono for Powerline:size=10
+!URxvt*boldFont:        xft:Liberation Mono for Powerline:bold:size=10
+!URxvt*italicFont:      xft:Liberation Mono for Powerline:italic:autohint=true:size=10
+!URxvt*boldItalicFont:  xft:Liberation Mono for Powerline:bold:italic:autohint=true:size=10
+
+! Decrease the letter spacing by 1 pixel.
+URxvt.letterSpace: -1
+
+! More Xft stuff
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting:true
+Xft.hintstyle: hintslight
