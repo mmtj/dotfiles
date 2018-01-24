@@ -1,4 +1,5 @@
 set nocompatible
+syntax on
 
 set t_Co=256
 colorscheme slate
@@ -6,93 +7,75 @@ colorscheme slate
 set number
 set mouse=
 set linebreak
-set sessionoptions+=resize
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-set foldmethod=indent   
-set foldnestmax=10      
-set nofoldenable        
-set foldlevel=0
+ "folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
 
-filetype off                  " required
-
+filetype off
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'scrooloose/nerdtree'
 
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+"" Linters
+"Plugin 'vim-syntastic/syntastic'
+" Asyncronous linter
+Plug 'w0rp/ale'
 
-" git pluginy
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+" Fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
 
-" airline status bar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Git state visualization
+Plug 'airblade/vim-gitgutter'
 
-" formating
-Plugin 'godlygeek/tabular'
-Plugin 'editorconfig/editorconfig-vim'
+" Airline and theme
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" filesearch
-Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim.git'
+" Ruby helper
+Plug 'ngmy/vim-rubocop'
+
+" Nice color theme
+Plug 'NLKNguyen/papercolor-theme'
+
+" Openscad syntax highlighting 
+"Plug 'sirtaj/vim-openscad'
+Plug 'sheerun/vim-polyglot'
+
+" Initialize plugin system
+call plug#end()
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Highlight gentoo ebuilds
-au BufRead, BufNewFile *.ebuild set filetype=ebuild
-
-"" C/C++ Make settings
-" pthread make (clang++)
-" set makeprg=clang++\ -Wall\ -pedantic\ -ggdb\ -lpthread\ -O0\ -o\ %<\ %
-
-" pthread make (g++)
-"set makeprg=g++\ -Wall\ -pedantic\ -ggdb\ -lpthread\ -O0\ -o\ %<\ %
-
-" C/C++ code snippets
-let @h = '€khI#ifndef €krv$yo#define po#endif /* pa */€ku€kui'
-let @n = 'i#include <stdio.h>inr €kb€kbt main (void){	return (0);}€ku€ku	aq€kb'
-let @i = 'i	for (int i = %€kb€KC; i < n; i++ú€kb) {}€ku		'
-let @j = '@i@i€ku€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kDij€kr€kr€kr€kr€kr€kr€kDj€kr€kr€kr€kr€kr€kr€kDj€kd	' 
-
-"" NerdTree settings
-" don't start NERDTree by default
-" let g:nerdtree_tabs_open_on_gui_startup=0
-" 
-" let NERDTreeQuitOnOpen = 1
-" 
-" autocmd vimenter * if !argc() | NERDTree | endif
+" call vundle#end()            " required
+" filetype on    " required
 
 " show airline even with one tab
 set laststatus=2
+let g:airline#extensions#tabline#enabled=1
 
-"" always show gutter column; prevent vim from 'moving' column
-"let g:gitgutter_sign_column_always = 1
-"" custom vim-gitgutter colors
-"let g:gitgutter_override_sign_column_highlight = 0
-"
-"highlight clean SignColumn
+let syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,E225,E211'
 
-"highlight GitGutterAdd ctermbg=#00ff00 ctermfg=#00ff00
-"highlight GitGutterDelete ctermbg=#ff0000 ctermfg=#ff0000
-"highlight GitGutterChange ctermbg=#ff8c00 ctermfg=#ff8c00
+let g:ale_linters = { 'cpp': ['clang'] }
+let g:ale_cpp_clang_options='-std=c++11 -Wall'
+let g:airline#extensions#ale#enabled = 1
 
-" update time for gitgutter
-set updatetime=250
-
-" set list listchars=tab:>-,nbsp:.,trail:.,extends:>,precedes:<
-" let &showbreak = '^'
+" set makeprg=bundle\ exec\ asciidoctor-revealjs\ %
+set makeprg=clang++\ -Wall\ -std=c++11\ %
