@@ -4,6 +4,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" highlight current line
+set cursorline
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -52,8 +55,7 @@ let g:signify_realtime = 1
 " is it still needed anlongside CoC?
 let g:ale_linters = {'python': ['flake8', 'pylint']}
 
-"" LSP setup
-" coc
+"" LSP setup - coc
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
@@ -73,6 +75,8 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"" end of coc config
 
 " remember last position in file
 if has("autocmd")
